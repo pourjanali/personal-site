@@ -372,6 +372,11 @@
                             d="M9.4 16.6L4.8 12l4.6-4.6L8 6l-6 6 6 6 1.4-1.4zm5.2 0l4.6-4.6-4.6-4.6L16 6l6 6-6 6-1.4-1.4z" />
                     </svg>
                 </a>
+                <a href="#" id="open-products-modal" class="social-btn" aria-label="Products">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
+                    </svg>
+                </a>
             </div>
         </div>
 
@@ -389,6 +394,23 @@
                         class="sepidar-link"><strong>Python SDK</strong><span>GitHub</span></a>
                     <a href="https://github.com/pourjanali/sepidar-laravel" target="_blank"
                         class="sepidar-link"><strong>Laravel Package</strong><span>GitHub</span></a>
+                </div>
+            </div>
+        </div>
+
+        <div id="products-modal" class="modal-overlay">
+            <div class="modal-content">
+                <button id="close-products-modal" class="modal-close">&times;</button>
+                <h2>My Products</h2>
+                <p>Software tools and applications I've built</p>
+                <div class="sepidar-links">
+                    <a href="https://github.com/pourjanali/TimeMetro" target="_blank"
+                        class="sepidar-link"><strong>TimeMetro - Tabriz Metro Passenger
+                            App</strong><span>GitHub</span></a>
+                    <a href="https://timemetro.ir/" target="_blank" class="sepidar-link"><strong>TimeMetro
+                            Website</strong><span>Visit</span></a>
+                    <a href="https://github.com/pourjanali/IVR-Audio-Generator" target="_blank"
+                        class="sepidar-link"><strong>IVR Audio Generator</strong><span>GitHub</span></a>
                 </div>
             </div>
         </div>
@@ -435,12 +457,26 @@
 
         // --- Existing Modal & Year Logic ---
         document.getElementById("year").textContent = new Date().getFullYear();
-        const modal = document.getElementById("sepidar-modal");
+
+        // Sepidar Modal
+        const sepidarModal = document.getElementById("sepidar-modal");
         document.getElementById("open-sepidar-modal").onclick = e => {
-            e.preventDefault(); modal.style.display = "flex";
+            e.preventDefault(); sepidarModal.style.display = "flex";
         };
-        document.getElementById("close-sepidar-modal").onclick = () => modal.style.display = "none";
-        window.onclick = e => { if (e.target === modal) modal.style.display = "none"; };
+        document.getElementById("close-sepidar-modal").onclick = () => sepidarModal.style.display = "none";
+
+        // Products Modal
+        const productsModal = document.getElementById("products-modal");
+        document.getElementById("open-products-modal").onclick = e => {
+            e.preventDefault(); productsModal.style.display = "flex";
+        };
+        document.getElementById("close-products-modal").onclick = () => productsModal.style.display = "none";
+
+        // Close modals when clicking outside
+        window.onclick = e => {
+            if (e.target === sepidarModal) sepidarModal.style.display = "none";
+            if (e.target === productsModal) productsModal.style.display = "none";
+        };
     </script>
 </body>
 
