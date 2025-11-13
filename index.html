@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="description" content="Behnam Pourjanali — Network & Security Researcher | Software Engineer">
+    <meta property="og:title" content="Behnam Pourjanali">
+    <meta property="og:description" content="Network & Security Researcher | Software Engineer">
+    <meta property="og:image" content="https://avatars.githubusercontent.com/u/95444541">
+    <meta name="theme-color" content="#007aff">
+    <title>Behnam Pourjanali</title>
+    <link rel="icon" href="https://avatars.githubusercontent.com/u/95444541" type="image/png">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* RESET */
+        *,
+        *::before,
+        *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            height: 100%;
+        }
+
+        /* THEME COLORS */
+        :root {
+            --accent: #007aff;
+            --bg-light: linear-gradient(180deg, #fdfdfd 0%, #f2f4f8 100%);
+            --text-light: #1b1b1b;
+            --muted-light: #6b7280;
+
+            --bg-dark: linear-gradient(180deg, #0c0d0f 0%, #1a1c1f 100%);
+            --text-dark: #e5e7eb;
+            --muted-dark: #9ca3af;
+        }
+
+        body {
+            font-family: "Inter", "Segoe UI", Roboto, sans-serif;
+            background: var(--bg-light);
+            color: var(--text-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 2rem;
+            transition: background 0.4s, color 0.4s;
+        }
+
+        /* --- DARK MODE --- */
+        body.dark-mode {
+            background: var(--bg-dark);
+            color: var(--text-dark);
+        }
+
+        /* ----------------- */
+
+        /* CARD */
+        .card {
+            position: relative;
+            /* Added for toggle positioning */
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            padding: 2.5rem 3rem;
+            text-align: center;
+            animation: fadeIn 0.8s ease;
+            width: 100%;
+            max-width: 420px;
+        }
+
+        body.dark-mode .card {
+            background: rgba(35, 35, 37, 0.85);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .logo {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            border: 3px solid rgba(255, 255, 255, 0.9);
+            margin-bottom: 1.5rem;
+            object-fit: cover;
+            transition: transform 0.3s ease, filter 0.4s ease;
+            /* Added filter transition */
+            filter: invert(1);
+            /* Invert logo in light mode */
+        }
+
+        body.dark-mode .logo {
+            filter: invert(0);
+            /* Remove invert in dark mode */
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
+        }
+
+        h1 {
+            font-size: 1.9rem;
+            font-weight: 700;
+            margin-bottom: 0.4rem;
+        }
+
+        .tagline {
+            font-size: 1rem;
+            color: var(--muted-light);
+            margin-bottom: 2.5rem;
+        }
+
+        body.dark-mode .tagline {
+            color: var(--muted-dark);
+        }
+
+        /* SOCIAL BUTTONS */
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.2rem;
+        }
+
+        .social-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 52px;
+            height: 52px;
+            border-radius: 50%;
+            background: rgba(0, 0, 0, 0.05);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .social-btn svg {
+            width: 26px;
+            height: 26px;
+            fill: var(--text-light);
+            transition: fill 0.3s ease;
+        }
+
+        .social-btn:hover {
+            transform: translateY(-3px);
+            background: var(--accent);
+        }
+
+        .social-btn:hover svg {
+            fill: #fff;
+        }
+
+        body.dark-mode .social-btn {
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        body.dark-mode .social-btn svg {
+            fill: var(--text-dark);
+        }
+
+        /* MODAL */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(5px);
+            align-items: center;
+            justify-content: center;
+            z-index: 100;
+        }
+
+        .modal-content {
+            background: #fff;
+            border-radius: 20px;
+            padding: 2rem 2.5rem;
+            max-width: 500px;
+            width: 90%;
+            color: #222;
+            position: relative;
+        }
+
+        body.dark-mode .modal-content {
+            background: #2a2c2e;
+            color: #eee;
+        }
+
+        .modal-close {
+            position: absolute;
+            left: 20px;
+            top: 15px;
+            background: none;
+            border: none;
+            font-size: 1.8rem;
+            color: #aaa;
+            cursor: pointer;
+        }
+
+        .modal-close:hover {
+            color: #000;
+        }
+
+        .sepidar-links {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .sepidar-link {
+            display: flex;
+            justify-content: space-between;
+            background: rgba(0, 0, 0, 0.05);
+            padding: 1rem 1.5rem;
+            border-radius: 12px;
+            color: #333;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+
+        /* --- NEW: Dark mode fix for modal links --- */
+        body.dark-mode .sepidar-link {
+            background: rgba(255, 255, 255, 0.08);
+            color: var(--muted-dark);
+        }
+
+        /* ------------------------------------------ */
+
+        .sepidar-link:hover {
+            background: var(--accent);
+            color: #fff;
+            transform: translateY(-2px);
+        }
+
+        footer {
+            margin-top: 2rem;
+            font-size: 0.85rem;
+            color: var(--muted-light);
+        }
+
+        body.dark-mode footer {
+            color: var(--muted-dark);
+        }
+
+        /* --- THEME TOGGLE BUTTON --- */
+        #theme-toggle {
+            position: absolute;
+            /* Changed from fixed */
+            top: 1rem;
+            /* Positioned inside card */
+            right: 1rem;
+            /* Positioned inside card */
+            background: rgba(0, 0, 0, 0.05);
+            /* Matched social button */
+            border: none;
+            border-radius: 50%;
+            width: 44px;
+            height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            backdrop-filter: blur(5px);
+            z-index: 10;
+            /* Lowered z-index */
+            transition: background 0.3s;
+            padding: 0;
+        }
+
+        body.dark-mode #theme-toggle {
+            background: rgba(255, 255, 255, 0.08);
+            /* Matched social button */
+        }
+
+        /* --- MODIFIED: Base style for both icons --- */
+        #theme-toggle svg {
+            position: absolute;
+            width: 22px;
+            /* Adjusted for outline icon */
+            height: 22px;
+            /* Adjusted for outline icon */
+            stroke: var(--text-light);
+            /* CHANGED from fill to stroke */
+            filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.3));
+            opacity: 0;
+            transform: scale(0.8);
+            transition: opacity 0.4s ease, transform 0.3s ease, stroke 0.4s ease;
+            /* CHANGED from fill */
+        }
+
+        /* Show only the sun icon by default (light mode) */
+        body:not(.dark-mode) #theme-toggle .sun-icon {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        /* --- MODIFIED: Show moon icon in dark mode --- */
+        body.dark-mode #theme-toggle .moon-icon {
+            opacity: 1;
+            transform: scale(1);
+            stroke: var(--text-dark);
+            /* CHANGED from fill to stroke */
+            filter: drop-shadow(0 1px 3px rgba(255, 255, 255, 0.2));
+        }
+
+        /* Hover animation */
+        #theme-toggle:hover svg {
+            transform: scale(1.1);
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(15px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <main>
+        <div class="card">
+            <button id="theme-toggle" aria-label="Toggle light/dark mode">
+                <!-- --- NEW: Minimal Sun Icon --- -->
+                <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="5"></circle>
+                    <line x1="12" y1="1" x2="12" y2="3"></line>
+                    <line x1="12" y1="21" x2="12" y2="23"></line>
+                    <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                    <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                    <line x1="1" y1="12" x2="3" y2="12"></line>
+                    <line x1="21" y1="12" x2="23" y2="12"></line>
+                    <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                    <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                </svg>
+                <!-- --- NEW: Minimal Moon Icon --- -->
+                <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                </svg>
+            </button>
+
+            <img src="https://avatars.githubusercontent.com/u/95444541" alt="Behnam Pourjanali" class="logo">
+            <h1>Behnam Pourjanali</h1>
+            <p class="tagline">Network & Security Researcher · Software Engineer</p>
+            <div class="social-links">
+                <a href="https://github.com/pourjanali" target="_blank" class="social-btn" aria-label="GitHub">
+                    <svg viewBox="0 0 24 24">
+                        <path
+                            d="M12 .3c-6.63 0-12 5.37-12 12 0 5.3 3.44 9.8 8.2 11.38.6.11.8-.26.8-.58 0-.29-.01-1.04-.02-2.04-3.34.72-4.04-1.61-4.04-1.61-.88-1.12-2.14-1.42-2.14-1.42-1.08-.74.08-.73.08-.73 1.2.08 1.84 1.24 1.84 1.24 1.07 1.84 2.8 1.3 3.49.99.11-.78.42-1.31.76-1.61-2.67-.3-5.47-1.33-5.47-5.93 0-1.31.46-2.38 1.23-3.22-.13-.3-.54-1.52.1-3.18 0 0 1-.32 3.3 1.23a10.7 10.7 0 0 1 3-.41c1.02 0 2.05.14 3.01.4 2.28-1.55 3.28-1.23 3.28-1.23.64 1.66.24 2.88.12 3.18.77.84 1.23 1.91 1.23 3.22 0 4.61-2.81 5.62-5.48 5.92.43.36.82 1.09.82 2.22 0 1.61-.02 2.9-.02 3.29 0 .32.22.69.83.57C20.56 22.1 24 17.6 24 12.3c0-6.63-5.37-12-12-12z" />
+                    </svg>
+                </a>
+                <a href="https://www.linkedin.com/in/behnam-pourjanali/" target="_blank" class="social-btn"
+                    aria-label="LinkedIn">
+                    <svg viewBox="0 0 24 24">
+                        <path
+                            d="M22.23 0H1.77A1.76 1.76 0 0 0 0 1.73v20.54C0 23.23.79 24 1.77 24h20.46c.97 0 1.77-.77 1.77-1.73V1.73A1.76 1.76 0 0 0 22.23 0zM7.06 20.45H3.54V9h3.52v11.45zM5.3 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.36V9h3.41v1.56h.05c.47-.9 1.63-1.85 3.37-1.85 3.6 0 4.26 2.37 4.26 5.46v6.28z" />
+                    </svg>
+                </a>
+                <a href="#" id="open-sepidar-modal" class="social-btn" aria-label="Sepidar SDKs">
+                    <svg viewBox="0 0 24 24">
+                        <path
+                            d="M9.4 16.6L4.8 12l4.6-4.6L8 6l-6 6 6 6 1.4-1.4zm5.2 0l4.6-4.6-4.6-4.6L16 6l6 6-6 6-1.4-1.4z" />
+                    </svg>
+                </a>
+            </div>
+        </div>
+
+        <div id="sepidar-modal" class="modal-overlay">
+            <div class="modal-content" dir="rtl">
+                <button id="close-sepidar-modal" class="modal-close">&times;</button>
+                <h2>پروژه‌های وب سرویس سپیدار</h2>
+                <p>لیست SDKها و مستندات</p>
+                <div class="sepidar-links">
+                    <a href="https://pourjanali.github.io/sepidar-api-docs/" target="_blank"
+                        class="sepidar-link"><strong>مستندات API</strong><span>مشاهده</span></a>
+                    <a href="https://github.com/pourjanali/sepidar-php-sdk" target="_blank"
+                        class="sepidar-link"><strong>PHP SDK</strong><span>GitHub</span></a>
+                    <a href="https://github.com/pourjanali/sepidar-python-sdk" target="_blank"
+                        class="sepidar-link"><strong>Python SDK</strong><span>GitHub</span></a>
+                    <a href="https://github.com/pourjanali/sepidar-laravel" target="_blank"
+                        class="sepidar-link"><strong>Laravel Package</strong><span>GitHub</span></a>
+                </div>
+            </div>
+        </div>
+
+        <footer>© <span id="year"></span> Behnam Pourjanali</footer>
+    </main>
+
+    <script>
+        // --- NEW Theme Toggle Logic ---
+        (function () {
+            const toggle = document.getElementById('theme-toggle');
+            if (!toggle) return;
+            const body = document.body;
+
+            function setTheme(isDark) {
+                if (isDark) {
+                    body.classList.add('dark-mode');
+                    localStorage.setItem('theme', 'dark');
+                } else {
+                    body.classList.remove('dark-mode');
+                    localStorage.setItem('theme', 'light');
+                }
+            }
+
+            toggle.addEventListener('click', () => {
+                setTheme(!body.classList.contains('dark-mode'));
+            });
+
+            // Set initial theme on load
+            const savedTheme = localStorage.getItem('theme');
+            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+            if (savedTheme === 'dark') {
+                setTheme(true);
+            } else if (savedTheme === 'light') {
+                setTheme(false);
+            } else {
+                // If no save, use system preference
+                setTheme(prefersDark);
+            }
+        })();
+        // --- End of Theme Logic ---
+
+
+        // --- Existing Modal & Year Logic ---
+        document.getElementById("year").textContent = new Date().getFullYear();
+        const modal = document.getElementById("sepidar-modal");
+        document.getElementById("open-sepidar-modal").onclick = e => {
+            e.preventDefault(); modal.style.display = "flex";
+        };
+        document.getElementById("close-sepidar-modal").onclick = () => modal.style.display = "none";
+        window.onclick = e => { if (e.target === modal) modal.style.display = "none"; };
+    </script>
+</body>
+
+</html>
