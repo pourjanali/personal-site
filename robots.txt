@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+
+Disallow: /Old_docs/
+Disallow: /LICENSE
+Disallow: /README.md
+
+Sitemap: https://pourjanali.ir/sitemap.xml
